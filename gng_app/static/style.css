@@ -1,0 +1,44 @@
+* {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+input {
+    height: 30px;
+    width: 90px;
+}
+
+button,
+a {
+    margin-top: 10px;
+    padding: 5px;
+    text-decoration: none;
+    background-color: white;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+#winner.h1 {
+    color: white;
+    font-size: 50px;
+}
+
+#low,
+#high {
+    background-color: red;
+    color: white;
+    font-size: 50px;
+    padding: 100px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+#winner {
+    background-color: green;
+    width: 30px;
+    margin: 25px auto;
+    padding: 108px;
+    color: white;
+}

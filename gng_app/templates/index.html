@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Number Game</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <h4>I am thinking of a number between 1 and 100<br> Take a guess!</h4>
+
+    <form action="/submit" method="post">
+        {% csrf_token %}
+        <input type="text" name="guess"><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if request.session.status == "game_over" %}
+    <h2>You Lose!</h2>
+    <a href='/clear'>Play again!</a> {% elif request.session.status == "Too low!" %}
+    <h2>you chose: {{request.session.num}}</h2>
+    <h2 id="low">{{request.session.status}}</h2>
+    <h2> number of guesses: {{request.session.counter}}</h2>
+
+    {% elif request.session.status == "Too high!" %}
+    <h2>you chose: {{request.session.num}}</h2>
+    <h2 id="high">{{request.session.status}}</h2>
+    <h2> number of guesses: {{request.session.counter}}</h2>
+
+    {% elif request.session.status == "correct" %}
+    <div id="winner">
+        <h2 id="win">{{request.session.pick}} was the number!</h2>
+
+        <form action="/leaderboard" method="post">
+            {% csrf_token %}
+            <input type="text" name="name">
+            <button type="submit">Submit to Leaderboard</button>
+
+        </form>
+
+
+        <a href='/clear'>Play again!</a>
+    </div>
+    <p>Total number of guesses: {{request.session.counter}}</p>
+
+
+    {% endif %}
+
+</body>
+
+</html>
